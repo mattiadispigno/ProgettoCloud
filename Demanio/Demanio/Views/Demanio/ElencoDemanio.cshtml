@@ -3,11 +3,34 @@
     Layout = null;
 }
 
-@foreach (var datoDemanio in Model.DatiDemanio)
-{
-    <tr>
-        <td>@datoDemanio.Provincia</td>
-        <td>@datoDemanio.ValoreTotaleeuro</td>
-        <td>@datoDemanio.NumeroFabbricati</td>
-    </tr>
-}
+
+<html>
+<head>
+    <title> Elenco Demani</title>
+</head>
+<body>
+    <h1> Pagina di Elenco Demani </h1>
+    <table>
+        <thead>
+            <tr>
+                <th> Provincia</th>
+                <th> Valore Totale (euro)</th>
+                <th> Numero Fabbricati </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var datoDemanio in Model.DatiDemanio)
+            {
+                <tr>
+                    <td>@datoDemanio.Provincia</td>
+                    <td>@datoDemanio.ValoreTotaleeuro</td>
+                    <td>@datoDemanio.NumeroFabbricati</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+</body>
+
+</html>

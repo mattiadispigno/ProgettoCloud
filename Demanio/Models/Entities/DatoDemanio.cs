@@ -25,6 +25,4 @@ namespace Models.Entities
         public long ValoreTerrenieuro { get; set; }
         public string Provincia { get; set; }
     }
-
-
 }

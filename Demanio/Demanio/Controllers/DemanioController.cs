@@ -12,10 +12,20 @@ namespace Demanio.Controllers
             _demanioService = demanioService;
         }
 
-        public IActionResult ElencoDemanio()
+
+        [HttpGet]
+        public IActionResult ElencoDemanio(string provincia)
         {
+            ///Demanio/ElencoDemanio?provincia=ancona per passare la provincia
             DemanioGetDataViewModel vm = new DemanioGetDataViewModel();
-            vm.DatiDemanio =  _demanioService.DaiDati().Result;
+            if(provincia == null || provincia == "")
+            {
+                vm.DatiDemanio = _demanioService.DaiDati().Result;
+            }
+            else
+            {
+                vm.DatiDemanio = _demanioService.RicercaPerProvincia(provincia).Result;
+            }
             return View(vm);
         }
     }
