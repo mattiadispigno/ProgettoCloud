@@ -2,7 +2,7 @@
 
 namespace Demanio.ViewModels
 {
-    public class DemanioGetDataViewModel
+    public class DemanioElencoDemanioViewModel
     {
         public DatoDemanio[] DatiDemanio { get; set; }
     }

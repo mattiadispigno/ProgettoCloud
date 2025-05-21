@@ -1,0 +1,6 @@
+services:
+  demanio:
+    image: ${DOCKER_REGISTRY-}demanio
+    build:
+      context: .
+      dockerfile: Demanio/Dockerfile

@@ -1,5 +1,7 @@
+using Application.Abstractions.Services;
 using Application.Extensions;
 using Demanio.Extensions;
+using SoapCore;
 
 namespace Demanio
 {
@@ -35,6 +37,11 @@ namespace Demanio
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.UseSoapEndpoint<ISoapService>("/Service.wsdl", new SoapEncoderOptions(), SoapSerializer.XmlSerializer);
+            });
 
             app.Run();
         }

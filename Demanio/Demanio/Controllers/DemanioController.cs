@@ -12,12 +12,11 @@ namespace Demanio.Controllers
             _demanioService = demanioService;
         }
 
-
         [HttpGet]
         public IActionResult ElencoDemanio(string provincia)
         {
             ///Demanio/ElencoDemanio?provincia=ancona per passare la provincia
-            DemanioGetDataViewModel vm = new DemanioGetDataViewModel();
+            DemanioElencoDemanioViewModel vm = new DemanioElencoDemanioViewModel();
             if(provincia == null || provincia == "")
             {
                 vm.DatiDemanio = _demanioService.DaiDati().Result;
