@@ -1,0 +1,13 @@
+﻿@model Demanio.ViewModels.DemanioGetDataViewModel
+@{
+    Layout = null;
+}
+
+@foreach (var datoDemanio in Model.DatiDemanio)
+{
+    <tr>
+        <td>@datoDemanio.Provincia</td>
+        <td>@datoDemanio.ValoreTotaleeuro</td>
+        <td>@datoDemanio.NumeroFabbricati</td>
+    </tr>
+}
