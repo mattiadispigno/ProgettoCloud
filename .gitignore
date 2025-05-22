@@ -556,3 +556,7 @@ Icon[]
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# Environment File
+.env
+.env.*

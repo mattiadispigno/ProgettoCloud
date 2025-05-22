@@ -61,7 +61,7 @@ namespace Demanio
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.UseSoapEndpoint<ISoapService>("/Service.wsdl", new SoapEncoderOptions(), SoapSerializer.XmlSerializer);
+                endpoints.UseSoapEndpoint<ISoapService>("/ServiceDemanio.wsdl", new SoapEncoderOptions(), SoapSerializer.XmlSerializer);
             });
 
             app.Run();
