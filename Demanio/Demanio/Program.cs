@@ -1,7 +1,10 @@
 using Application.Abstractions.Services;
 using Application.Extensions;
+using Application.Factories;
 using Demanio.Extensions;
+using Microsoft.AspNetCore.Diagnostics;
 using SoapCore;
+using System.Net;
 
 namespace Demanio
 {
@@ -11,11 +14,9 @@ namespace Demanio
         {
             var builder = WebApplication.CreateBuilder(args);
 
-
             builder.Services
                 .AddUiServices()
                 .AddApplicationServices();
-
 
             var app = builder.Build();
 
@@ -26,6 +27,25 @@ namespace Demanio
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseExceptionHandler(appError =>
+            {
+                appError.Run(async context =>
+                {
+                    context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                    context.Response.ContentType = "application/json";
+                    var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
+                    if (contextFeature != null)
+                    {
+                        Exception errorToRet = contextFeature.Error;
+                        var res = ResponseFactory
+                            .WithError(errorToRet);
+                        await context.Response.WriteAsJsonAsync(
+                            res
+                            );
+                    }
+                });
+            });
+
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -33,6 +53,7 @@ namespace Demanio
             app.UseRouting();
 
             app.UseAuthorization();
+
 
             app.MapControllerRoute(
                 name: "default",

@@ -4,3 +4,7 @@ services:
     build:
       context: .
       dockerfile: Demanio/Dockerfile
+      target: ${BUILD_TARGET:-final}
+    ports:
+        - "8080:8080"
+

@@ -17,7 +17,7 @@ namespace Application.Services
         }
         public DatoDemanio[] GetData()
         {
-            return _demanioService.DaiDati().Result;
+            return _demanioService.GetData().Result;
         }
 
         public DatoDemanio[] GetDataByProvincia(string provincia)

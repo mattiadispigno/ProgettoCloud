@@ -10,8 +10,10 @@ namespace Application.Abstractions.Services
 {
     public interface IDemanioService
     {
-        public Task<DatoDemanio[]> DaiDati();
+        public Task<DatoDemanio[]> GetData();
 
         public Task<DatoDemanio[]> RicercaPerProvincia(string Provincia);
+
+        public Task<DatoDemanioTotal[]> GetDataWithTotal();
     }
 }

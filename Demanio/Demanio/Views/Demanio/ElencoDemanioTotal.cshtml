@@ -1,0 +1,34 @@
+﻿@model Demanio.ViewModels.DemanioElencoDemanioTotalViewModel
+@{
+    Layout = null;
+}
+
+
+<html>
+<head>
+    <title> Elenco Demani con Totale per Regione</title>
+</head>
+<body>
+    <h1> Pagina di Elenco Demani </h1>
+    <table>
+        <thead>
+            <tr>
+                <th> Provincia</th>
+                <th> Valore Totale (euro)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var datoDemanio in Model.DatiDemanioTotal)
+            {
+                <tr>
+                    <td>@datoDemanio.Provincia</td>
+                    <td>@datoDemanio.TotaleSpesaProvincia</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+</body>
+
+</html>
