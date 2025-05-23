@@ -16,5 +16,8 @@ namespace Application.Abstractions.Services
 
         [OperationContract]
         DatoDemanio[] GetDataByProvincia(string provincia);
+        
+        [OperationContract]
+        Task<DatoDemanio[]> GetDataByRegione(string regione);
     }
 }

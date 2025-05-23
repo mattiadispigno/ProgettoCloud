@@ -21,21 +21,43 @@ namespace Demanio.Controllers.Api
 
         [HttpGet]
         [Route("demanio")]
-        public async Task<IActionResult> ElencoDemanio([FromQuery] string provincia = null)
+        public async Task<IActionResult> ElencoDemanio([FromQuery] string provincia = null, [FromQuery] string regione = null)
         {
             DatoDemanio[] result;
-            if (string.IsNullOrWhiteSpace(provincia))
+            if (string.IsNullOrEmpty(provincia)&& string.IsNullOrEmpty(regione))
+            {
+                result = await _demanioService.GetData();
+            }
+            else if (string.IsNullOrEmpty(provincia)) //se è stata inserita solo la regione
+            {
+                result = await _demanioService.RicercaPerRegione(regione);   
+            }
+            else //se la provincia è stata inserita, indipendentemente dalla regione 
+            {
+                result = await _demanioService.RicercaPerProvincia(provincia);
+            }
+            
+
+            return Ok(ResponseFactory.WithSuccess(result.ToList()));
+        }
+
+        [HttpGet]
+        [Route("demanioregione")]
+        public async Task<IActionResult> ElencoDemanioPerRegione([FromQuery] string regione = null)
+        {
+            DatoDemanio[] result;
+            if (string.IsNullOrWhiteSpace(regione) )
             {
                 result = await _demanioService.GetData();
             }
             else
             {
-                result = await _demanioService.RicercaPerProvincia(provincia);
+                result = await _demanioService.RicercaPerRegione(regione);
             }
-
+            
             return Ok(ResponseFactory.WithSuccess(result.ToList()));
+            
         }
-
 
         [HttpGet]
         [Route("demanio/total")]

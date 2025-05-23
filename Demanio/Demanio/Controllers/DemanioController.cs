@@ -13,17 +13,20 @@ namespace Demanio.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ElencoDemanio(string provincia)
+        public async Task<IActionResult> ElencoDemanio(string provincia, string regione)
         {
-            ///Demanio/ElencoDemanio?provincia=ancona per passare la provincia
             DemanioElencoDemanioViewModel vm = new DemanioElencoDemanioViewModel();
-            if (provincia == null || provincia == "")
+            if (provincia == "" && regione == "")
             {
                 vm.DatiDemanio = await _demanioService.GetData();
             }
-            else
+            else if (provincia == "") //se è stata inserita solo la regione
             {
-                vm.DatiDemanio = _demanioService.RicercaPerProvincia(provincia).Result;
+                vm.DatiDemanio = await _demanioService.RicercaPerRegione(regione);   
+            }
+            else //se la provincia è stata inserita, indipendentemente dalla regione 
+            {
+                vm.DatiDemanio = await _demanioService.RicercaPerProvincia(provincia);
             }
             return View(vm);
         }

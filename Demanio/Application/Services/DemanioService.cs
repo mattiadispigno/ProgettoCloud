@@ -9,7 +9,7 @@ namespace Application.Services
     public class DemanioService : IDemanioService
     {  
         public async Task<DatoDemanio[]> GetData()  
-        {  
+        {
             var httpClient = new HttpClient();
 
             string BaseUri = "https://dati.agenziademanio.it/odrepos/contopatrimoniale/patrimonio-2024-categoria-provincia.json";  
@@ -17,7 +17,7 @@ namespace Application.Services
             var response = await httpClient.GetAsync(BaseUri);  
             var contents = await response.Content.ReadAsStringAsync();  
 
-            DatoDemanio[] datiDemanio = JsonConvert.DeserializeObject<DatoDemanio[]>(contents);  
+            DatoDemanio[] datiDemanio = JsonConvert.DeserializeObject<DatoDemanio[]>(contents);
             return datiDemanio;
         }
 
@@ -42,11 +42,19 @@ namespace Application.Services
                 .ToArray();
         }
 
-        public async Task<DatoDemanio[]> RicercaPerProvincia(string Provincia)  
-        {  
+        public async Task<DatoDemanio[]> RicercaPerProvincia(string Provincia)
+        {
             DatoDemanio[] datiDemanio = await GetData();  
 
             return datiDemanio.Where(s => s.Provincia.ToUpper().Contains(Provincia.ToUpper())).ToArray();
+        }
+
+        public async Task<DatoDemanio[]> RicercaPerRegione(string Regione)
+        {
+            DatoDemanio[] datiDemanio = await GetData();  
+
+            return datiDemanio.Where(s => s.Regione.ToUpper().Contains(Regione.ToUpper())).ToArray();
+
         }
     }  
 }  

@@ -15,5 +15,6 @@ namespace Application.Abstractions.Services
         public Task<DatoDemanio[]> RicercaPerProvincia(string Provincia);
 
         public Task<DatoDemanioTotal[]> GetDataWithTotal();
+        public Task<DatoDemanio[]> RicercaPerRegione(string Regione);
     }
 }

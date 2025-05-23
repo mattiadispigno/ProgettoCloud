@@ -24,5 +24,10 @@ namespace Application.Services
         {
             return _demanioService.RicercaPerProvincia(provincia).Result;
         }
+
+        public async Task<DatoDemanio[]> GetDataByRegione(string regione)
+        {
+            return await _demanioService.RicercaPerRegione(regione);
+        }
     }
 }
