@@ -13,14 +13,14 @@ namespace Demanio.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ElencoDemanio(string provincia, string regione)
+        public async Task<IActionResult> ElencoDemanio([FromQuery] string provincia, [FromQuery] string regione)
         {
             DemanioElencoDemanioViewModel vm = new DemanioElencoDemanioViewModel();
-            if (provincia == "" && regione == "")
+            if (string.IsNullOrEmpty(provincia)&& string.IsNullOrEmpty(regione))
             {
                 vm.DatiDemanio = await _demanioService.GetData();
             }
-            else if (provincia == "") //se è stata inserita solo la regione
+            else if (string.IsNullOrEmpty(provincia)) //se è stata inserita solo la regione
             {
                 vm.DatiDemanio = await _demanioService.RicercaPerRegione(regione);   
             }
@@ -28,6 +28,7 @@ namespace Demanio.Controllers
             {
                 vm.DatiDemanio = await _demanioService.RicercaPerProvincia(provincia);
             }
+            
             return View(vm);
         }
 

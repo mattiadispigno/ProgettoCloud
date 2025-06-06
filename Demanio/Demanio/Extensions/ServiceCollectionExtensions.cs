@@ -18,7 +18,6 @@ namespace Demanio.Extensions
                         return new BadRequestResultFactory(context);
                     };
                 });
-
             return services;
         }
     }
